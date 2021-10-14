@@ -155,7 +155,7 @@ function ToDoList({todos,todo}:ToDoListProps){
 }
 
 function ToDoForm(){
-    const {toDoItems,addToDo,editTodo,ModifyTodo,destroyTodo,completeTodo} = useTodo();
+    const {toDoItems,addToDo,editTodo,modifyTodo,destroyTodo,completeTodo} = useTodo();
     return(
         <div
             className={clsx(
@@ -171,7 +171,7 @@ function ToDoForm(){
                     (props)=><ToDoItem 
                         {...props} 
                         onEdit={()=>editTodo(props.id)} 
-                        onModify={(content)=>ModifyTodo(props.id,content)}
+                        onModify={(content)=>modifyTodo(props.id,content)}
                         onComplete={()=>completeTodo(props.id)}
                         onDestroy={()=>destroyTodo(props.id)}
                     />

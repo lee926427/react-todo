@@ -14,7 +14,7 @@ export function useTodo(){
         setToDoItem([...toDoItems,{id:toDoItems.length+1,todo:content,isEdit:false,isDone:false}]);
     };
 
-    const ModifyTodo = (id:number,todo:string) =>{
+    const modifyTodo = (id:number,todo:string) =>{
         console.log(id,todo)
         const newToDoList = toDoItems.map(
             item=>{
@@ -59,7 +59,7 @@ export function useTodo(){
         toDoItems,
         addToDo,
         editTodo,
-        ModifyTodo,
+        modifyTodo,
         destroyTodo,
         completeTodo,
     }
