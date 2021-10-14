@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {useTodo,ToDoType} from "./hooks";
 import clsx from "clsx";
 import { FormEvent,ChangeEvent, ReactNode } from "react";
@@ -7,11 +8,11 @@ export interface MemoInputProps {
 } 
 
 function MemoInput({onAdd}:MemoInputProps){
+    const [memo, setMemo] = useState<string>('')
     const handleSubmit = (e:FormEvent) =>{
         e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
-        const todoContent = formData.get('todoContent');
-        onAdd(todoContent as string);
+        onAdd(memo);
+        setMemo('');
     }
     return (
         <form 
@@ -22,7 +23,7 @@ function MemoInput({onAdd}:MemoInputProps){
             )}
             onSubmit={handleSubmit}
         >
-            <input type="text" className="w-full px-2 py-3 outline-none" name="todoContent" placeholder="待辦事項" required/>
+            <input type="text" className="w-full px-2 py-1 outline-none border rounded" name="todoContent" placeholder="待辦事項" onChange={e=>setMemo(e.target.value)} value={memo} required/>
             <button type="submit" 
                 className={clsx(
                     'font-bold text-2xl  transition duration-200 border rounded-lg shadow-none',
@@ -147,7 +148,7 @@ function ToDoList({todos,todo}:ToDoListProps){
     return(
         <ul>
             {
-                todos.map((props)=><li className=" mt-4 first:mt-0">{todo(props)}</li>)
+                todos.map((props)=><li key={props.id} className=" mt-4 first:mt-0">{todo(props)}</li>)
             }
         </ul>
     )
